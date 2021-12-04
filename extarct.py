@@ -52,12 +52,15 @@ def extractFromPython(path):
             prev_left += len(ln['text']) + added + 1
         text += '\n'
         compailing(text , 'py')
-def extractFromNotPython(imageSrc) :
+def extractFromC(imageSrc) :
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
     text = pytesseract.image_to_string(Image.open(f'{imageSrc}'))
     compailing(text , 'cpp')
 
+#For C++
+#extractFromC("YOUR PATH HERE")
 
-extractFromNotPython("images/code5.png")
+#For Python
+#extractFromPython("YOUR PATH HERE")
 
 
