@@ -6,12 +6,12 @@ from PIL import Image
 import pandas as pd
 import subprocess
 
-def compailing(code , lang) :
+def compailing(code , lang , comp) :
     print(code)
     with open(f"output2.{lang}", "w") as text_file:
         text_file.write(code)
         text_file.close()
-    p = subprocess.Popen(['python', f'output2.{lang}'], stdout=subprocess.PIPE, stderr=subprocess.PIPE , shell = True)
+    p = subprocess.Popen([f'{comp}', f'output2.{lang}'], stdout=subprocess.PIPE, stderr=subprocess.PIPE , shell = True)
     out, err = p.communicate()
     print(out , err)
 
@@ -51,11 +51,11 @@ def extractFromPython(path):
             text += ln['text'] + ' '
             prev_left += len(ln['text']) + added + 1
         text += '\n'
-        compailing(text , 'py')
+        compailing(text , 'py' , 'python')
 def extractFromC(imageSrc) :
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
     text = pytesseract.image_to_string(Image.open(f'{imageSrc}'))
-    compailing(text , 'cpp')
+    compailing(text , 'cpp' , 'gcc')
 
 #For C++
 #extractFromC("YOUR PATH HERE")
